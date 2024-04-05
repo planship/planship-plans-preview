@@ -1,0 +1,12 @@
+<script setup lang="ts">
+
+</script>
+
+<template>
+  <div class="flex flex-col overflow-hidden h-[calc(100dvh)]">
+    <div class="flex-grow overflow-y-scroll">
+      <slot />
+    </div>
+    <AppFooter />
+  </div>
+</template>
