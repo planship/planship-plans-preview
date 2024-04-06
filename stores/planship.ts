@@ -101,7 +101,6 @@ export const usePlanshipStore = defineStore('planship', () => {
 
   async function fetchAll(slug: string, force: boolean = false) {
     productSlug = slug
-    console.log("fetchAll")
     return fetchCurrentUser().then(async () => {
       await Promise.all([
         fetchEntitlements(true),
@@ -138,7 +137,6 @@ export const usePlanshipStore = defineStore('planship', () => {
 
     // getters
     defaultSubscription,
-    entitlements,
     currentPlanSlug,
     currentPlanName,
 

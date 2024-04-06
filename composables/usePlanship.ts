@@ -3,7 +3,6 @@ import { Planship } from '@planship/fetch'
 let planshipClientsBySlug = {}
 
 async function getAccessToken(productSlug: string) {
-  console.log("getAccessToken")
   return fetch(`/api/planshipToken?${new URLSearchParams({
     productSlug: productSlug,
   })}`).then(response => response.text())

@@ -17,16 +17,6 @@ const { modifySubscription } = planshipStore
 const { currentPlanSlug, plans } = storeToRefs(planshipStore)
 const planSelection = ref(planshipStore.currentPlanSlug)
 
-const props = defineProps({
-  productSlug: {
-    type: String,
-    required: true,
-  },
-});
-const { productSlug } = props;
-
-console.log(`Slug: ${productSlug}`)
-
 </script>
 
 <template>

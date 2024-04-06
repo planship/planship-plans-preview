@@ -22,52 +22,20 @@ const { currentPlanName } = storeToRefs(planshipStore)
           <div class="flex items-center flex-row">
             <NuxtLink
               class="block nav-link"
-              :class="route.name === 'index' ? 'bg-gray-700' : ''"
+              :class="route.name === 'slug' ? 'bg-gray-700' : ''"
               :to="`/${route.params.slug}`"
             >
               Plans
             </NuxtLink>
             <NuxtLink
               class="block nav-link"
-              :class="route.name === 'entitlements' ? 'bg-gray-700' : ''"
+              :class="route.name === 'slug-entitlements' ? 'bg-gray-700' : ''"
               :to="`/${route.params.slug}/entitlements`"
             >
               Entitlements
             </NuxtLink>
           </div>
           <div class="grow" />
-        </div>
-        <div class="shrink-0">
-          <Menu as="div" class="relative ml-3">
-            <MenuButton class="user-btn">
-              <span class="sr-only">Open user menu</span>
-              <img class="h-8 w-8 rounded-full" :src="currentUser.imageUrl" alt="">
-            </MenuButton>
-            <transition
-              enter-active-class="transition duration-100 ease-out"
-              enter-from-class="transform scale-95 opacity-0"
-              enter-to-class="transform scale-100 opacity-100"
-              leave-active-class="transition duration-75 ease-in"
-              leave-from-class="transform scale-100 opacity-100"
-              leave-to-class="transform scale-95 opacity-0"
-            >
-              <MenuItems class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none divide-y divide-gray-100">
-                <MenuItem>
-                  <span class="block px-4 py-2 text-sm text-gray-700">Signed in as <b>{{ currentUser.name }}</b></span>
-                </MenuItem>
-                <MenuItem v-slot="{ active, close }" as="div">
-                  <NuxtLink
-                    class="block px-4 py-2 text-sm text-gray-700"
-                    :class="[active ? 'bg-gray-100' : '']"
-                    to="/subscription"
-                    @click="close"
-                  >
-                    My plan: {{ currentPlanName }}
-                  </NuxtLink>
-                </MenuItem>
-              </MenuItems>
-            </transition>
-          </Menu>
         </div>
       </div>
     </div>
