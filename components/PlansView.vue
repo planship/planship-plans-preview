@@ -66,7 +66,7 @@ const planSelection = ref(planshipStore.currentPlanSlug)
                 :class="checked ? 'text-white' : 'text-gray-900'"
               >
                 <li class="flex items-center space-x-2">
-                  <span v-html="entitlement.name" />
+                  <span><strong>{{ entitlement.leverName }}: </strong>{{ entitlement.formattedValue}}</span>
                 </li>
               </ul>
             </RadioGroupDescription>
