@@ -20,10 +20,6 @@ export const usePlanshipStore = defineStore('planship', () => {
 
   const currentPlanName = computed(() => defaultSubscription.value?.plan.name)
 
-  function updateEntitlementsCb(newEntitlements) {
-    entitlements.value = newEntitlements
-  }
-
   async function fetchCurrentUser(force: boolean = false) {
     if (!force && currentUser.value?.id) {
       return
@@ -62,7 +58,7 @@ export const usePlanshipStore = defineStore('planship', () => {
 
     try {
       const planship = usePlanship(productSlug)
-      const newEntitlements = await planship.getEntitlements(userStore.currentUser.email, updateEntitlementsCb)
+      const newEntitlements = await planship.getEntitlements(userStore.currentUser.email)
       if (entitlements)
         entitlements.value = newEntitlements
     }
