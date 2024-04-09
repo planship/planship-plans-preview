@@ -13,9 +13,10 @@ const planshipStore = usePlanshipStore()
 const route = useRoute()
 const { modifySubscription } = planshipStore
 
-function changePlan(planSlug) {
-  modifySubscription(planSlug)
-  navigateTo(`/${route.params.slug}/entitlements`)
+async function changePlan(planSlug) {
+  modifySubscription(planSlug).then(() =>
+    navigateTo(`/${route.params.slug}/entitlements`)
+  )
 }
 
 const isGridView = ref(true)
