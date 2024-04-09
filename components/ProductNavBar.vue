@@ -11,7 +11,6 @@ const { currentUser } = storeToRefs(useUserStore())
 const planshipStore = usePlanshipStore()
 await planshipStore.fetchAll(route.params.slug, true)
 
-const { currentPlanName } = storeToRefs(planshipStore)
 </script>
 
 <template>
@@ -35,7 +34,6 @@ const { currentPlanName } = storeToRefs(planshipStore)
               Entitlements
             </NuxtLink>
           </div>
-          <div class="grow" />
         </div>
       </div>
     </div>

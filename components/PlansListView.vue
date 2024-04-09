@@ -8,11 +8,10 @@ import {
   RadioGroupLabel,
   RadioGroupOption,
 } from '@headlessui/vue'
+
 import { usePlanshipStore } from '@/stores/planship'
 
 const planshipStore = usePlanshipStore()
-
-const { modifySubscription } = planshipStore
 
 const { currentPlanSlug, plans } = storeToRefs(planshipStore)
 const planSelection = ref(planshipStore.currentPlanSlug)
@@ -79,9 +78,9 @@ const planSelection = ref(planshipStore.currentPlanSlug)
         class="block md:w-64 w-full rounded-md px-10 py-3 text-base text-white font-medium"
         :class="currentPlanSlug !== planSelection ? 'bg-green-500 hover:bg-opacity-90' : 'bg-gray-400'"
         :disabled="currentPlanSlug === planSelection"
-        @click="modifySubscription(planSelection)"
+        @click="$emit('changePlan', planSelection)"
       >
-        Change subscription
+        Change plan
       </button>
     </div>
   </div>
