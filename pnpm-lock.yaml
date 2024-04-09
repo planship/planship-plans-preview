@@ -15,8 +15,8 @@ dependencies:
     specifier: ^0.5.1
     version: 0.5.1(typescript@5.4.4)(vue@3.4.21)
   '@planship/fetch':
-    specifier: 0.2.3-alpha4
-    version: 0.2.3-alpha4
+    specifier: 0.2.3-alpha5
+    version: 0.2.3-alpha5
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(typescript@5.4.4)(vue@3.4.21)
@@ -1793,14 +1793,14 @@ packages:
     dev: true
     optional: true
 
-  /@planship/fetch@0.2.3-alpha4:
-    resolution: {integrity: sha512-EA2SFVqxWMu3lyeUUa0lhzOncWXeNtJ29mqepTbBnKvEFIINqOX4EJHgLlnarMZ5IZVhNYNdbOmO+QFMbsTayQ==}
+  /@planship/fetch@0.2.3-alpha5:
+    resolution: {integrity: sha512-j0wcBeNo57GV3yxYOXLrgSrhpqlu9oApoAcVH8xUYr+Z23/zO/RGXEPn97pv0gWk+BiHGMVEWt0Hz8Xhv09Yxw==}
     dependencies:
-      '@planship/models': 0.2.2-alpha4
+      '@planship/models': 0.2.2-alpha5
     dev: false
 
-  /@planship/models@0.2.2-alpha4:
-    resolution: {integrity: sha512-cJ14HcE6D7ZRuUUSHDmOCxzdiyui3nGDcjoVsMwOGcuJaJ2tFJ3pdk2NlKaZfgS2rejnRlQpbzvSkmb9OE5YTw==}
+  /@planship/models@0.2.2-alpha5:
+    resolution: {integrity: sha512-w8YREaojF+j8TBp4Wx8h+xE4Arp2hPxHaKFS9ekJNC5+VPWCTGMwMzyydztuqmYAoX1dStnRkXOndamkI8iYbw==}
     dev: false
 
   /@polka/url@1.0.0-next.24:

@@ -94,9 +94,7 @@ export const usePlanshipStore = defineStore('planship', () => {
     const planship = usePlanship(productSlug)
     const planList = await planship.listPlans()
     plans.value = await Promise.all(planList.map(async ({ slug }) => {
-      const plan = await planship.getPlan(slug)
-      plan.entitlements.sort((a, b) => (a.order - b.order))
-      return plan
+      return await planship.getPlan(slug, "lever_name")
     }))
   }
 
@@ -105,7 +103,7 @@ export const usePlanshipStore = defineStore('planship', () => {
       return
     }
     const planship = usePlanship(productSlug)
-    const leverList = await planship.listLevers()
+    const leverList = await planship.listLevers("name")
     levers.value = leverList
   }
 
