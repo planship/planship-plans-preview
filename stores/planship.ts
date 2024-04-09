@@ -4,6 +4,7 @@ import { useUserStore } from '@/stores/user'
 export const usePlanshipStore = defineStore('planship', () => {
   const subscriptions = ref([])
   const entitlements = ref({})
+  const levers = ref([])
   const plans = ref([])
   const currentUser = ref({})
   let productSlug = ''
@@ -99,6 +100,15 @@ export const usePlanshipStore = defineStore('planship', () => {
     }))
   }
 
+  async function fetchLevers(force: boolean = false) {
+    if (!force && levers.value?.length) {
+      return
+    }
+    const planship = usePlanship(productSlug)
+    const leverList = await planship.listLevers()
+    levers.value = leverList
+  }
+
   async function fetchAll(slug: string, force: boolean = false) {
     productSlug = slug
     return fetchCurrentUser().then(async () => {
@@ -106,6 +116,7 @@ export const usePlanshipStore = defineStore('planship', () => {
         fetchEntitlements(true),
         fetchSubscriptions(force),
         fetchPlans(force),
+        fetchLevers(force),
       ])
     })
   }
@@ -134,6 +145,7 @@ export const usePlanshipStore = defineStore('planship', () => {
     entitlements,
     plans,
     currentUser,
+    levers,
 
     // getters
     defaultSubscription,
