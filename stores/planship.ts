@@ -7,7 +7,7 @@ export const usePlanshipStore = defineStore('planship', () => {
   const levers = ref([])
   const plans = ref([])
   const currentUser = ref({})
-  let productSlug = ''
+  const productSlug = ref('')
 
   const userStore = useUserStore()
 
@@ -26,7 +26,7 @@ export const usePlanshipStore = defineStore('planship', () => {
     }
     try {
       let user
-      const planship = usePlanship(productSlug)
+      const planship = usePlanship(productSlug.value)
       try {
         user = await planship.getCustomer(userStore.currentUser.email)
       }
@@ -57,7 +57,7 @@ export const usePlanshipStore = defineStore('planship', () => {
     }
 
     try {
-      const planship = usePlanship(productSlug)
+      const planship = usePlanship(productSlug.value)
       const newEntitlements = await planship.getEntitlements(userStore.currentUser.email)
       if (entitlements)
         entitlements.value = newEntitlements
@@ -74,8 +74,8 @@ export const usePlanshipStore = defineStore('planship', () => {
 
     if (currentUser.value) {
       try {
-        const planship = usePlanship(productSlug)
-        subscriptions.value = await planship.listSubscriptions(currentUser.value.id, productSlug)
+        const planship = usePlanship(productSlug.value)
+        subscriptions.value = await planship.listSubscriptions(currentUser.value.id, productSlug.value)
       }
       catch (error) {
         console.dir(error.response)
@@ -87,7 +87,7 @@ export const usePlanshipStore = defineStore('planship', () => {
     if (!force && plans.value?.length) {
       return
     }
-    const planship = usePlanship(productSlug)
+    const planship = usePlanship(productSlug.value)
     const planList = await planship.listPlans()
     plans.value = await Promise.all(planList.map(async ({ slug }) => {
       return await planship.getPlan(slug, "lever_name")
@@ -98,13 +98,16 @@ export const usePlanshipStore = defineStore('planship', () => {
     if (!force && levers.value?.length) {
       return
     }
-    const planship = usePlanship(productSlug)
+    const planship = usePlanship(productSlug.value)
     const leverList = await planship.listLevers("name")
     levers.value = leverList
   }
 
   async function fetchAll(slug: string, force: boolean = false) {
-    productSlug = slug
+    if (productSlug.value != slug)
+      force = true
+
+    productSlug.value = slug
     return fetchCurrentUser().then(async () => {
       await Promise.all([
         fetchEntitlements(true),
@@ -116,7 +119,7 @@ export const usePlanshipStore = defineStore('planship', () => {
   }
 
   async function modifySubscription(newPlanSlug: string) {
-    const planship = usePlanship(productSlug)
+    const planship = usePlanship(productSlug.value)
     if (defaultSubscription.value?.subscriptionId) {
       await planship.modifySubscription(userStore.currentUser.email, defaultSubscription.value.subscriptionId, {
         planSlug: newPlanSlug,
@@ -140,6 +143,7 @@ export const usePlanshipStore = defineStore('planship', () => {
     plans,
     currentUser,
     levers,
+    productSlug,
 
     // getters
     defaultSubscription,
