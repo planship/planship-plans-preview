@@ -6,7 +6,6 @@ import { usePlanshipStore } from '@/stores/planship'
 const planshipStore = usePlanshipStore()
 
 const { currentPlanSlug, plans, levers } = storeToRefs(planshipStore)
-
 </script>
 
 <template>
@@ -18,7 +17,6 @@ const { currentPlanSlug, plans, levers } = storeToRefs(planshipStore)
           <template
             v-for="plan in plans"
             :key="plan.slug"
-            :value="plan.slug"
           >
             <div class="flex-1 text-center flex flex-col p-2">
               <p
@@ -45,19 +43,21 @@ const { currentPlanSlug, plans, levers } = storeToRefs(planshipStore)
         <template
           v-for="(lever, leverIndex) in levers"
           :key="lever.slug"
-          :value="lever.slug"
         >
           <div class="flex flex-row">
             <div class="flex-none w-64 p-2 border-r ">
-              <p class="font-medium">{{ lever.name }}</p>
+              <p class="font-medium">
+                {{ lever.name }}
+              </p>
             </div>
             <div class="flex flex-row flex-1 divide-x">
               <template
                 v-for="plan in plans"
                 :key="plan.slug"
-                :value="plan.slug"
               >
-                <div class="flex-1 text-center p-2 text-gray-500">{{ plan.entitlements[leverIndex].formattedValue }} </div>
+                <div class="flex-1 text-center p-2 text-gray-500">
+                  {{ plan.entitlements[leverIndex].formattedValue }}
+                </div>
               </template>
             </div>
           </div>

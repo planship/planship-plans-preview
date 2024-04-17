@@ -15,7 +15,6 @@ const planshipStore = usePlanshipStore()
 
 const { currentPlanSlug, plans } = storeToRefs(planshipStore)
 const planSelection = ref(planshipStore.currentPlanSlug)
-
 </script>
 
 <template>
@@ -65,7 +64,7 @@ const planSelection = ref(planshipStore.currentPlanSlug)
                 :class="checked ? 'text-white' : 'text-gray-900'"
               >
                 <li class="flex items-center space-x-2">
-                  <span><strong>{{ entitlement.leverName }}: </strong>{{ entitlement.formattedValue}}</span>
+                  <span><strong>{{ entitlement.leverName }}: </strong>{{ entitlement.formattedValue }}</span>
                 </li>
               </ul>
             </RadioGroupDescription>

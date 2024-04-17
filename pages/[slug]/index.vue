@@ -1,8 +1,4 @@
 <script setup>
-definePageMeta({
-  layout: 'product'
-})
-
 import {
   Switch,
 } from '@headlessui/vue'
@@ -11,13 +7,17 @@ import { TableCellsIcon, ViewColumnsIcon } from '@heroicons/vue/24/outline'
 
 import { usePlanshipStore } from '@/stores/planship'
 
+definePageMeta({
+  layout: 'product',
+})
+
 const planshipStore = usePlanshipStore()
 const route = useRoute()
 const { modifySubscription } = planshipStore
 
 async function changePlan(planSlug) {
   modifySubscription(planSlug).then(() =>
-    navigateTo(`/${route.params.slug}/entitlements`)
+    navigateTo(`/${route.params.slug}/entitlements`),
   )
 }
 
@@ -44,9 +44,8 @@ const isGridView = ref(true)
       <span class="sr-only">Show as grid</span>
       <TableCellsIcon class="h-6 w-6" aria-hidden="true" />
     </div>
-
   </div>
-  <PlansGridView @change-plan="changePlan" class="hidden md:block" v-if="isGridView" />
-  <PlansListView @change-plan="changePlan"  class="hidden md:block" v-else/>
-  <PlansListView @change-plan="changePlan"  class="md:hidden" />
+  <PlansGridView v-if="isGridView" class="hidden md:block" @change-plan="changePlan" />
+  <PlansListView v-else class="hidden md:block" @change-plan="changePlan" />
+  <PlansListView class="md:hidden" @change-plan="changePlan" />
 </template>

@@ -1,4 +1,4 @@
-import { defineStore, skipHydrate } from 'pinia'
+import { defineStore } from 'pinia'
 import { useUserStore } from '@/stores/user'
 
 export const usePlanshipStore = defineStore('planship', () => {
@@ -13,7 +13,6 @@ export const usePlanshipStore = defineStore('planship', () => {
 
   const defaultSubscription = computed(() => subscriptions.value?.[0])
 
-
   const currentPlanSlug = computed(() => {
     return defaultSubscription.value?.plan.slug
   })
@@ -21,9 +20,9 @@ export const usePlanshipStore = defineStore('planship', () => {
   const currentPlanName = computed(() => defaultSubscription.value?.plan.name)
 
   async function fetchCurrentUser(force: boolean = false) {
-    if (!force && currentUser.value?.id) {
+    if (!force && currentUser.value?.id)
       return
-    }
+
     try {
       let user
       const planship = usePlanship(productSlug.value)
@@ -43,7 +42,6 @@ export const usePlanshipStore = defineStore('planship', () => {
         await planship.createSubscription(user.id, 'personal')
       }
       currentUser.value = user
-      console.dir(user)
     }
     catch (error) {
       // Handle Plaship API errors here
@@ -52,9 +50,8 @@ export const usePlanshipStore = defineStore('planship', () => {
   }
 
   async function fetchEntitlements(force: boolean = false) {
-    if (!force && Object.keys(entitlements.value).length) {
+    if (!force && Object.keys(entitlements.value).length)
       return
-    }
 
     try {
       const planship = usePlanship(productSlug.value)
@@ -68,9 +65,8 @@ export const usePlanshipStore = defineStore('planship', () => {
   }
 
   async function fetchSubscriptions(force: boolean = false) {
-    if (!force && subscriptions.value?.length) {
+    if (!force && subscriptions.value?.length)
       return
-    }
 
     if (currentUser.value) {
       try {
@@ -84,27 +80,27 @@ export const usePlanshipStore = defineStore('planship', () => {
   }
 
   async function fetchPlans(force: boolean = false) {
-    if (!force && plans.value?.length) {
+    if (!force && plans.value?.length)
       return
-    }
+
     const planship = usePlanship(productSlug.value)
     const planList = await planship.listPlans()
     plans.value = await Promise.all(planList.map(async ({ slug }) => {
-      return await planship.getPlan(slug, "lever_name")
+      return await planship.getPlan(slug, 'lever_name')
     }))
   }
 
   async function fetchLevers(force: boolean = false) {
-    if (!force && levers.value?.length) {
+    if (!force && levers.value?.length)
       return
-    }
+
     const planship = usePlanship(productSlug.value)
-    const leverList = await planship.listLevers("name")
+    const leverList = await planship.listLevers('name')
     levers.value = leverList
   }
 
   async function fetchAll(slug: string, force: boolean = false) {
-    if (productSlug.value != slug)
+    if (productSlug.value !== slug)
       force = true
 
     productSlug.value = slug
@@ -133,8 +129,6 @@ export const usePlanshipStore = defineStore('planship', () => {
 
     await Promise.all([fetchSubscriptions(true), fetchEntitlements(true)])
   }
-
-
 
   return {
     // state

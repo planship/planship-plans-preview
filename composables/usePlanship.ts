@@ -1,10 +1,10 @@
 import { Planship } from '@planship/fetch'
 
-let planshipClientsBySlug = {}
+const planshipClientsBySlug = {}
 
 async function getAccessToken(productSlug: string) {
   return fetch(`/api/planshipToken?${new URLSearchParams({
-    productSlug: productSlug,
+    productSlug,
   })}`).then(response => response.text())
 }
 
@@ -19,17 +19,18 @@ function getPlanshipClient(productSlug: string) {
           clientSecret: useRuntimeConfig().planshipApiClientSecret,
         },
         {
-          baseUrl: useRuntimeConfig().public.serverPlanshipBaseUrl
-        }
+          baseUrl: useRuntimeConfig().public.serverPlanshipBaseUrl,
+        },
       )
-    } else {
+    }
+    else {
       planshipClient = new Planship(
         productSlug,
         () => getAccessToken(productSlug),
         {
           baseUrl: useRuntimeConfig().public.clientPlanshipBaseUrl,
           webSocketUrl: useRuntimeConfig().public.webSocketUrl,
-        }
+        },
       )
     }
     planshipClientsBySlug[productSlug] = planshipClient
@@ -38,6 +39,6 @@ function getPlanshipClient(productSlug: string) {
   return planshipClientsBySlug[productSlug]
 }
 
-export default function(productSlug: string) {
+export default function (productSlug: string) {
   return getPlanshipClient(productSlug)
 }

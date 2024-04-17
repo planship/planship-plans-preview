@@ -1,12 +1,11 @@
 <script setup>
-import { Disclosure, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { Disclosure } from '@headlessui/vue'
 import { usePlanshipStore } from '@/stores/planship'
 
 const route = useRoute()
 
 const planshipStore = usePlanshipStore()
 await planshipStore.fetchAll(route.params.slug)
-
 </script>
 
 <template>
