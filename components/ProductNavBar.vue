@@ -13,7 +13,7 @@ await planshipStore.fetchAll(route.params.slug)
     <div class="mx-auto max-w-full px-4">
       <div class="flex items-start md:items-center justify-between py-3">
         <div class="grow flex flex-col md:flex-row">
-          <div class="flex items-center flex-row">
+          <div class="flex flex-row">
             <NuxtLink
               class="block nav-link"
               :class="route.name === 'slug' ? 'bg-gray-700' : ''"
@@ -27,6 +27,15 @@ await planshipStore.fetchAll(route.params.slug)
               :to="`/${route.params.slug}/entitlements`"
             >
               Entitlements
+            </NuxtLink>
+          </div>
+          <div class="flex flex-1 justify-end flex-row">
+            <NuxtLink
+              class="nav-link"
+              :class="route.name === 'slug-entitlements' ? 'bg-gray-700' : ''"
+              :to="`https://app.planship.io/auth/sign-up?goto=https://app.planship.io/clone/${route.params.slug}`"
+            >
+              Edit plans
             </NuxtLink>
           </div>
         </div>
