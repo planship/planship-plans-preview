@@ -39,7 +39,6 @@ export const usePlanshipStore = defineStore('planship', () => {
       if (!user) {
         // Register customer if they don't exist in Planship
         const user = await planship.createCustomer({ alternativeId: userStore.currentUser.email })
-        await planship.createSubscription(user.id, 'personal')
       }
       currentUser.value = user
     }
@@ -111,6 +110,13 @@ export const usePlanshipStore = defineStore('planship', () => {
         fetchPlans(force),
         fetchLevers(force),
       ])
+
+      if (!defaultSubscription.value) {
+        const defaultPlan = plans.value?.[0]
+        if (defaultPlan) {
+          await modifySubscription(defaultPlan.slug)
+        }
+      }
     })
   }
 
