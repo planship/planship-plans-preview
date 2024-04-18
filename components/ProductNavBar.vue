@@ -31,11 +31,10 @@ await planshipStore.fetchAll(route.params.slug)
           </div>
           <div class="flex flex-1 justify-end flex-row">
             <NuxtLink
-              class="nav-link"
-              :class="route.name === 'slug-entitlements' ? 'bg-gray-700' : ''"
+              class="nav-link planship-link"
               :to="`https://app.planship.io/auth/sign-up?goto=https://app.planship.io/clone/${route.params.slug}`"
             >
-              Edit plans
+              Get started with these plans
             </NuxtLink>
           </div>
         </div>
@@ -50,7 +49,15 @@ await planshipStore.fetchAll(route.params.slug)
 }
 
 .nav-link {
-  @apply border border-gray-500 md:border-none text-gray-300 hover:bg-gray-600 hover:text-white rounded-md mx-1 px-2 py-1 text-sm font-medium;
+  @apply border border-gray-500 md:border-none text-gray-300 hover:bg-gray-600 hover:text-white rounded-md mx-1 p-2 text-sm font-medium;
+}
+
+.planship-link {
+  background-image: linear-gradient(135deg, rgb(255, 81, 74) 0, rgb(200, 20, 13) 100%);
+  @apply border text-white border-gray-500 md:border-none rounded-md mx-1 p-2 text-sm font-medium;
+  &:hover {
+    background: rgb(200, 20, 13);
+  }
 }
 
 .user-btn {

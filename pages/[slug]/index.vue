@@ -32,7 +32,7 @@ const isGridView = ref(true)
     </div>
     <Switch
       v-model="isGridView"
-      :class="isGridView ? 'bg-blue-600' : 'bg-gray-200'"
+      :class="isGridView ? 'bg-gray-400' : 'bg-gray-400'"
       class="m-2 relative inline-flex h-6 w-11 items-center rounded-full"
     >
       <span
